@@ -1,0 +1,30 @@
+{
+  "name": "TODO",
+  "version": "1.0.0",
+  "description": "Building todo app using MERN",
+  "main:": "server.js",
+  "scripts": {
+    "start": "node index.js",
+    "start-watch": "nodemon server.js",
+    "dev": "concurrently \"yarn run start-watch\" \"cd client && yarn start\""
+  },
+  "keywords": [],
+  "author": "Minh Tran",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "is-empty": "^1.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.11",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "validator": "^13.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "nodemon": "^2.0.3"
+  }
+}
