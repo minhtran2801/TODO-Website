@@ -1,5 +1,6 @@
 const Validator = require("validator");
 const isEmpty = require("is-empty");
+const moment = require("moment");
 
 module.exports = function validateRegisterInput(data) {
   let errors = {};
@@ -49,8 +50,15 @@ module.exports = function validateRegisterInput(data) {
   if (Validator.isEmpty(data.dob)) {
     errors.name = "Date of birth field is required";
   }
- 
-  // 
+
+  if (!moment(data.dob, "YYYY-MM-DD").isValid) {
+    errors.name = "Invalid date";
+  }
+
+  // Check gender
+  if (Validator.isEmpty(data.gender)) {
+    errors.name = "Gender field is required";
+  }
 
   return {
     errors,

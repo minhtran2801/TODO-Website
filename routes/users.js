@@ -25,26 +25,26 @@ router.post("/register", (req, res) => {
         .status(400)
         .json({ email: `${req.body.email} is already taken` });
     } else {
-      const newUser = new User({
+        const newUser = new User({
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
-        dob: req.body.dob,
-        gender: req.body.gender,
+        dob: new Date(req.body.dob).toISOString(),
+        gender: req.body.gender
+      });
+
+      // Hash password to store in DB
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+          if (err) throw err;
+          newUser.password = hash;
+          newUser
+            .save()
+            .then(user => res.json(user))
+            .catch((err) => console.log(err));
+        });
       });
     }
-  });
-
-  // Hash password to store in DB
-  bcrypt.genSalt(10, (err, salt) => {
-    bcrypt.hash(newUser.password, salt, (err, hash) => {
-      if (err) throw err;
-      newUser.password = hash;
-      newUser
-        .save()
-        .then((user) => res.json(user))
-        .catch((err) => console.log(err));
-    });
   });
 });
 
@@ -68,7 +68,7 @@ router.post("/login", (req, res) => {
     }
 
     // Check password
-    bcrypt.compare(password, user.password).then((isMatch) => {
+    bcrypt.compare(pw, user.password).then((isMatch) => {
       if (isMatch) {
         // Create JWT payload if match
         const payload = {

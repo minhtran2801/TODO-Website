@@ -1,9 +1,17 @@
 .App {
   text-align: center;
   font-size: calc(10px + 2vmin);
-  width: 60%;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
+  font-family: Open sans, sans-serif;
+  width: 100%;
+}
+
+h4 {
+  line-height: 1.62;
+  font-size: 2.3rem;
+  letter-spacing: 2px;
 }
 
 input {
@@ -13,6 +21,7 @@ input {
   border-bottom: 2px #101113 solid;
   background: none;
   font-size: 1.5rem;
+  font-family: Open sans, sans-serif;
   color: #787a80;
 }
 
@@ -20,51 +29,21 @@ input:focus {
   outline: none;
 }
 
-button {
-  width: 25%;
-  height: 45px;
-  border: none;
-  margin-left: 10px;
-  font-size: 25px;
-  background: #101113;
-  border-radius: 5px;
-  color: #787a80;
-  cursor: pointer;
-}
-
 button:focus {
   outline: none;
 }
 
-ul {
-  list-style: none;
-  text-align: left;
-  padding: 15px;
-  background: #171a1f;
-  border-radius: 5px;
-}
-
-li {
-  padding: 15px;
-  font-size: 1.5rem;
-  margin-bottom: 15px;
-  background: #282c34;
-  border-radius: 5px;
-  overflow-wrap: break-word;
-  cursor: pointer;
-}
-
 @media only screen and (min-width: 300px) {
   .App {
-    width: 80%;
+    width: 100%;
   }
 
   input {
-    width: 100%
+    width: 100%;
   }
 
   button {
-    width: 100%;
+    width: 50%;
     margin-top: 15px;
     margin-left: 0;
   }
@@ -72,7 +51,7 @@ li {
 
 @media only screen and (min-width: 640px) {
   .App {
-    width: 60%;
+    width: 100%;
   }
 
   input {

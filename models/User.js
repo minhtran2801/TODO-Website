@@ -18,7 +18,7 @@ const UserSchema = new Schema({
         type: Date,
         required: true
     }, 
-    bender: {
+    gender: {
         type: String,
         required: true
     }
