@@ -1,4 +1,4 @@
 # TODO-Website
 
 To do website using MERN:
-Currently working on login/register part
+Currently working Redux store to connect frontend to backend
