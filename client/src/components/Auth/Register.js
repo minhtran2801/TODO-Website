@@ -1,6 +1,10 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import M from "materialize-css";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { registerUser } from "../../actions/authActions";
+import classnames from "classnames";
 
 class Register extends Component {
   constructor() {
@@ -18,8 +22,17 @@ class Register extends Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
+
   componentDidMount() {
     M.AutoInit();
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/todo");
+    }
   }
 
   onChange = (e) => {
@@ -37,6 +50,8 @@ class Register extends Component {
       dob: `${this.state.year}-${this.state.month}-${this.state.day}`,
       gender: this.state.gender,
     };
+
+    this.props.registerUser(newUser, this.props.history);
 
     console.log(newUser);
   };
@@ -66,8 +81,10 @@ class Register extends Component {
                   error={errors.name}
                   id="name"
                   type="text"
+                  className={classnames("", { invalid: errors.name })}
                 />
                 <label htmlFor="name">Name</label>
+                <span className="red-text">{errors.name}</span>
               </div>
               <div className="input-field col s12">
                 <input
@@ -76,8 +93,10 @@ class Register extends Component {
                   error={errors.email}
                   id="email"
                   type="email"
+                  className={classnames("", { invalid: errors.email })}
                 />
                 <label htmlFor="email">Email</label>
+                <span className="red-text">{errors.email}</span>
               </div>
               <div className="input-field col s12">
                 <input
@@ -86,8 +105,10 @@ class Register extends Component {
                   error={errors.password}
                   id="password"
                   type="password"
+                  className={classnames("", { invalid: errors.password })}
                 />
                 <label htmlFor="password">Password</label>
+                <span className="red-text">{errors.password}</span>
               </div>
               <div className="input-field col s12">
                 <input
@@ -96,12 +117,15 @@ class Register extends Component {
                   error={errors.password2}
                   id="password2"
                   type="password"
+                  className={classnames("", { invalid: errors.password2 })}
                 />
                 <label htmlFor="password2">Confirm Password</label>
+                <span className="red-text">{errors.password2}</span>
               </div>
               <div>
                 <div className="input-field col s3">
                   <label htmlFor="dob">Date of birth</label>
+                  <span className="red-text">{errors.dob}</span>
                 </div>
                 <div className="input-field col s3">
                   <input
@@ -110,6 +134,7 @@ class Register extends Component {
                     error={errors.dob}
                     type="text"
                     id="day"
+                    className={classnames("", { invalid: errors.dob })}
                   />
                   <label htmlFor="day">DD</label>
                 </div>
@@ -120,6 +145,7 @@ class Register extends Component {
                     error={errors.dob}
                     type="text"
                     id="month"
+                    className={classnames("", { invalid: errors.dob })}
                   />
                   <label htmlFor="month">MM</label>
                 </div>
@@ -130,6 +156,7 @@ class Register extends Component {
                     error={errors.dob}
                     type="text"
                     id="year"
+                    className={classnames("", { invalid: errors.dob })}
                   />
                   <label htmlFor="year">YYYY</label>
                 </div>
@@ -137,9 +164,15 @@ class Register extends Component {
               <div>
                 <div className="input-field col s3">
                   <label htmlFor="gender">Gender</label>
+                  <span className="red-text">{errors.gender}</span>
                 </div>
                 <div className="input-field col s9">
-                  <select id="gender"  value={this.state.gender} onChange={this.onChange}>
+                  <select
+                    id="gender"
+                    value={this.state.gender}
+                    onChange={this.onChange}
+                    className={classnames("", { invalid: errors.gender })}
+                  >
                     <option value="" disabled>
                       Choose your gender
                     </option>
@@ -171,4 +204,14 @@ class Register extends Component {
   }
 }
 
-export default Register;
+Register.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+};
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  errors: state.errors,
+});
+
+export default connect(mapStateToProps, { registerUser })(withRouter(Register));
