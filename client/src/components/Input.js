@@ -53,7 +53,7 @@ class Input extends Component {
                   letterSpacing: "1.5px",
                   marginTop: "1rem",
                 }}
-                onClick={this.handleChange}
+                onClick={this.addTodo}
                 className="btn btn-large waves-effect waves-light hoverable black"
               >
                 Add todo

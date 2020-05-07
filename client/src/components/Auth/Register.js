@@ -122,10 +122,9 @@ class Register extends Component {
                 <label htmlFor="password2">Confirm Password</label>
                 <span className="red-text">{errors.password2}</span>
               </div>
-              <div>
+              <div className="input-field col s12">
                 <div className="input-field col s3">
                   <label htmlFor="dob">Date of birth</label>
-                  <span className="red-text">{errors.dob}</span>
                 </div>
                 <div className="input-field col s3">
                   <input
@@ -160,11 +159,11 @@ class Register extends Component {
                   />
                   <label htmlFor="year">YYYY</label>
                 </div>
+                <span className="red-text">{errors.dob}</span>
               </div>
-              <div>
+              <div className="input-field col s12">
                 <div className="input-field col s3">
                   <label htmlFor="gender">Gender</label>
-                  <span className="red-text">{errors.gender}</span>
                 </div>
                 <div className="input-field col s9">
                   <select
@@ -181,6 +180,7 @@ class Register extends Component {
                     <option value="Other">Other</option>
                   </select>
                 </div>
+                <span className="red-text">{errors.gender}</span>
               </div>
               <div className="col s12" style={{ paddingLeft: "11.150px" }}>
                 <button

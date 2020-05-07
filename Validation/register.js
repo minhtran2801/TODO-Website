@@ -6,11 +6,11 @@ module.exports = function validateRegisterInput(data) {
   let errors = {};
 
   // Convert empty fields to empty string to use Validator
-  data.name = !isEmpty(data.name) ? data.name : "";
+  data.name = !isEmpty(data.name) ? Validate.escape(data.name) : "";
   data.email = !isEmpty(data.email) ? data.email : "";
   data.password = !isEmpty(data.password) ? data.password : "";
-  data.password2 = !isEmpty(data.password2) ? data.password2 : "";
-  data.dob = !isEmpty(data.dob) ? data.dob : "";
+  data.password2 = (!isEmpty(data.password2)) ? data.password2 : "";
+  data.dob = (data.dob != "--") ? data.dob : "";
   data.gender = !isEmpty(data.gender) ? data.gender : "";
 
   // Name check
@@ -34,11 +34,11 @@ module.exports = function validateRegisterInput(data) {
     errors.password2 = "Please confirm your password";
   }
 
-  if (!Validator.isLength(data.password, { min: 6, max: 30 })) {
-    errors.password = "Password must be at least 6 characters";
+  if (!Validator.isLength(data.password, { min: 8, max: 30 })) {
+    errors.password = "Password must be at least 8 characters";
   }
 
-  if (!Validator.isAlphanumeric(data.password, "en-US")) {
+  if (Validator.isAlpha(data.password, "en-US") || Validator.isNumeric(data.password, {no_symbols: true})) {
     errors.password = "Password must include a number and a letter";
   }
 
@@ -48,16 +48,16 @@ module.exports = function validateRegisterInput(data) {
 
   // Check dob
   if (Validator.isEmpty(data.dob)) {
-    errors.name = "Date of birth field is required";
+    errors.dob = "Date of birth field is required";
   }
 
   if (!moment(data.dob, "YYYY-MM-DD").isValid) {
-    errors.name = "Invalid date";
+    errors.dob = "Invalid date";
   }
 
   // Check gender
   if (Validator.isEmpty(data.gender)) {
-    errors.name = "Gender field is required";
+    errors.gender = "Gender field is required";
   }
 
   return {
