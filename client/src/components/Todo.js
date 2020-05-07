@@ -4,6 +4,7 @@ import axios from "axios";
 import Input from "./Input";
 import ListTodo from "./ListTodo";
 
+
 class Todo extends Component {
 
   state = {
@@ -38,7 +39,7 @@ class Todo extends Component {
 
   render() {
       let { todos } = this.state;
-      console.log(todos);
+      
       return (
           <div>
           <h1>My Todo(s)</h1>

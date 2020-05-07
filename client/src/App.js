@@ -14,6 +14,7 @@ import Register from "./components/Auth/Register";
 import Login from "./components/Auth/Login";
 import Todo from "./components/Todo";
 import PrivateRoute from "./components/private-route/PrivateRoute";
+import SuccessRegistration from "./components/Auth/SuccessRegister";
 
 if (localStorage.jwtToken) {
   const token = localStorage.jwtToken;
@@ -39,6 +40,7 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/success" component={SuccessRegistration}/>
             <Switch>
               <PrivateRoute exact path="/Todo" component={Todo} />
             </Switch>

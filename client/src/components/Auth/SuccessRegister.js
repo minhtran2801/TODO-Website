@@ -9,3 +9,5 @@ class SuccessRegistration extends Component {
         );
     }
 }
+
+export default SuccessRegistration;

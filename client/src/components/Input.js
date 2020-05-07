@@ -10,7 +10,6 @@ class Input extends Component {
     const task = { action: this.state.action };
 
     if (task.action && task.action.length > 0) {
-      
       axios
         .post("/api/todos", task)
         .then((res) => {
@@ -34,12 +33,37 @@ class Input extends Component {
   render() {
     let { action } = this.state;
     return (
-      <div>
-        <input type="text" onChange={this.handleChange} value={action} />
-        <button onClick={this.addTodo}>Add todo</button>
+      <div className="container">
+        <div style={{ marginTop: "1rem" }} className="row">
+          <div className="col s8 offset-s2">
+            <div className="input-field col s12">
+              <input
+                type="text"
+                onChange={this.handleChange}
+                value={action}
+                id="todo"
+              />
+              <label htmlFor="todo">Add a TODO task</label>
+            </div>
+            <div className="col s12" style={{ paddingLeft: "11.150px" }}>
+              <button
+                style={{
+                  width: "150px",
+                  borderRadius: "3px",
+                  letterSpacing: "1.5px",
+                  marginTop: "1rem",
+                }}
+                onClick={this.handleChange}
+                className="btn btn-large waves-effect waves-light hoverable black"
+              >
+                Add todo
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
 }
 
-export default Input
+export default Input;
